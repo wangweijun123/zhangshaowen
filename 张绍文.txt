@@ -1,0 +1,148 @@
+一  高质量高发
+
+1 奔溃:  
+java 与 native奔溃的获取
+
+bugly 捕获 java与native （breakpad）奔溃
+
+bugly 相信你能抓到java nativie的anr的log
+
+ANR异常怎么搞:  
+
+监听anr文件
+监控消息队列运行时间
+anr原理
+（这里会迁出一个面出来, 组件的回调函数背系统规定了，组件的回调是谁来调用，跨进程，调用进程是谁, 其实也就是activity启动流程）
+http://gityuan.com/2015/10/31/binder-prepare/
+
+2 内存
+
+内存泄漏与内存抖动
+
+bitmapt的 像素数据
+重复的bitmap 与 不匹配view的图片，超宽率
+内存监控模块: 大对象的分配
+
+3  卡顿：
+本地工具: systrace, traceview
+可以看到所有线程函数调用栈以及各个函数的调用时间，时间占比
+
+facebook 的 profilo 性能统计工具
+
+打点插桩，修改字节码，aspect 性能统计工具，
+
+
+
+1 anr 原理，从源码的角度分析，在上面情况下弹出的， (#####未实践##### )
+2 anr 采集，如何分析
+3 预防
+
+线程被CPU执行
+Thread.sleep() 或者线程正在进行文件io操作读取操作，让出cpu，读取完毕进入调度序列
+
+消息： 依赖c函数： natviePollOnce , nativeWake
+消息
+
+
+启动优化：
+业务并行，任务依赖 (#####未实践##### )
+
+任务并行：注意锁的问题
+
+4,(上) 启动优化，预览闪屏
+   业务初始化并行，阿里的alpha
+    ASM 插装,统计函数耗时
+（下）启动过程不建议网络IO（负载过高，io性能下降）	
+liunx 读文件的时候，以block为单位读取，大小为4kb
+	
+
+5, IO 优化
+虚拟文件系统 (接口)--->具体的文件系统（实现）
+1 为什么磁盘会损坏(可能硬件与软件的问题)
+2 为什么io有时候变慢(内存不足，系统回收，把cache清掉了，page cache 丢失)
+
+app 文件系统(page cache:内存缓存(文件的数据))  磁盘(file)
+android有两个class
+MemoryFile  MappedByteBuffer 内存映射
+
+android binder mmap 一次数据copy (#####未实践##### )
+文中提到“我们使用 mmap 仅仅只需要一次数据拷贝”，这个说法是不准确的，内存映射的场景直接操作的就是映射到的内存，不需要额外的一次拷贝。
+
+Binder的方案确实需要一次数据拷贝，那是Binder的机制决定的，而不是因为内存映射需要一次数据拷贝。(#####未实践验证##### )
+在Binder机制中，内存映射在一次通信过程中是单侧的：数据发送方通过transact将数据写入到内核态，这个过程需要一次数据拷贝
+(写入过程非内存映射，否则不需要“写”)；而接收方直接映射到了这一块内存，接收的过程不需要内存拷贝，所以Binder机制需要一次数据拷贝。
+
+
+30个40M大小的文件,分别1，5， 10， 30个线程来读取耗时情况测试(#####未实践##### )
+结论CPU ，多线程在I/0操作上并没有那么大, 不是说线程越多，耗时越少，找到平衡点
+磁盘io的瓶颈在磁盘带宽
+nio例子--->  okhttp okio
+
+大量的小文件合并成大文件，访问的时候通过文件的偏移量与大小来访问，开源项目淘宝的TFS(#####未实践##### )
+/libcore/luni/src/main/java/libcore/io/
+H A D	IoBridge.java	
+
+1 几百kb的文件不要在主线程做read ----> 低端机很容易anr了
+2 读文件的buffer设置为block的整数倍4k
+3 资源别泄漏(file.close(), cursor.close())，再也回收不了oom的问题
+
+6 存储优化
+存储： 分区，存储空间分区域，单独格式化，单独的文件系统
+
+sp contentProvider file DB
+
+SP: 异步加载文件带锁了，如果没哟加载完成，主线程要去访问，得wait()  --> 所以得出结论预加载sp，如果不看源码，你咋知道，
+所以，确实我以前的学习方式有问题啊，没有看源码，听得多，动其实我也动了，源码与文档是最好的老师，当然前提你是能看的动
+源码的, 看blog，还去记，脑袋有问题呢，还强行记忆，你能记多久，啊，又是重来，是不是哪里出问题了，确实出问题
+
+SP小文件 ----> 微信使用MMKV 替换了sp, github上的wiki还需要查看(#####未实践#####)
+
+
+frameworks/base/services/core/java/com/android/server/am/ActiveServices.java
+
+ActivityThread.main(){
+ Looper.prepareMainLooper();
+ xxxxxx
+
+Looper.loop();
+}
+->准备好了一个looper{ MQ   }
+
+sThreadLocal.set(new Looper(quitAllowed));
+Looper 与 threadlocal(Thread.currentThread()获取) 关联
+
+
+
+(frameworks/base/core/jni/android_os_MessageQueue.cpp)：
+/system/core/libutils/include/utils/Looper.h
+
+ obj.wait();  --> 调用到了 nativeWait();
+
+
+uint64_t inc = 1;
+    ssize_t nWrite = TEMP_FAILURE_RETRY(write(mWakeEventFd, &inc, sizeof(uint64_t)));
+
+int eventCount = epoll_wait(mEpollFd, eventItems, EPOLL_MAX_EVENTS, timeoutMillis);
+
+
+
+
+
+
+
+frameworks/base/services/core/java/com/android/server/am/
+  - ActivityManagerService.java
+  - ActiveServices.java
+  - ServiceRecord.java
+  - ProcessRecord.java
+
+frameworks/base/core/java/android/app/
+  - IActivityManager.java
+  - ActivityManagerNative.java (内含AMP)
+  - ActivityManager.java
+  
+  - IApplicationThread.java
+  - ApplicationThreadNative.java (内含ATP)
+  - ActivityThread.java (内含ApplicationThread)
+  
+  - ContextImpl.java
