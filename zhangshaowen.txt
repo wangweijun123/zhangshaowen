@@ -99,18 +99,30 @@ SP小文件 ----> 微信使用MMKV 替换了sp, github上的wiki还需要查看(
 为何SP 跨进程不安全(#####未实践#####)
 
 https://github.com/Tencent/MMKV/wiki/android_ipc
+SharedPreference 跨进程不安全
 
-content Provider:
+
+
+
+
+content Provider:(跨进程数据共享(mmap ))
 
 初始化时机为何在Application.onCreate()之前(#####未实践#####)
 跨进程访问(binder机制:fd)
 binder传输大小限制：1M(#####未实践#####)
+进程锁: pthread_mutex
+
+/dev/binder  字符设备文件, 多个进程通过这个文件通信(文件锁)
+
 
 没有实践就没有发言权
 作为程序员，我们应该追求完美，最后钱自然而然的来了，所以千万别说因为钱
 源码在手，天下我有
 
-json,xml,protobuf(二进制压缩)
+
+对象序列话: Seriable(反射读取value，性能低) 与 parceable (性能更高)， seriva框架twtter
+
+数据序列化： json,xml,protobuf(二进制压缩)
 
 
 DB 
@@ -120,6 +132,19 @@ sqlite里面做号了同步，锁的粒度是文件(粒度太大了，能不能�
 数据库常见异常DatabaseLockedExeception, 多线程或者多进程导致，可以捕获这个异常，延时操作
 
 查询优化: 索引表---> 原始表
+
+WCDB 微信的开源的数据库 (#####未实践#####)
+orm框架,greenDAO  Room (面向的是开发者使用方便: 底层还是sqlite)
+
+并发的两个维度: 进程并发，一个进程中的多个线程并发
+sqlite 默认支持多进程并发, 使用的是文件锁(锁的力度够大了)
+也模式支持多线程并发，所以应用程序不需要并发安全的问题，只不过还是文件锁，整个DB的锁，没有细分到库，到表，到行锁的力度
+可以同时读
+写是互斥的
+
+数据加密(AES,DES)
+
+
 
 
 
