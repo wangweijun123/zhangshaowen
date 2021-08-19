@@ -1,0 +1,16 @@
+Jetpack 中 PrecomputedText 异步计算 measure 与 layout
+
+Realyout layout()的时候为何开销大(######为验证#######)
+
+PrecomputedText (######为验证#######)
+
+litho 异步measure与layout， ui thread运行 draw
+
+flutter
+
+减少布局层次
+
+
+7  安装包体积
+
+
