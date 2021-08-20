@@ -169,7 +169,18 @@ LinkTurbo: 加速： 使用wifi的同时使用移动网络加速
 网络库
 square okhttp   chrominu cronet   微信 mars    
 
-网络监控，性能监控，aspect(编译插桩,最好的实现方案 360 APM未实践ArgusAPM #####未实践#####)
+网络监控(一次往返的时间，从发起请求到收到响应，其实在volley已经做过了)
+性能监控，aspect(编译插桩,最好的实现方案 360 APM未实践ArgusAPM #####未实践#####)
+
+网络日志与远程诊断(#####未实践#####)
+
+
+8 UI 优化
+
+适配(dp, 限定符资源)
+匿名共享内存(#####未实践#####)
+overDraw  	
+
        
 
 frameworks/base/services/core/java/com/android/server/am/ActiveServices.java
