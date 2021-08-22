@@ -28,3 +28,90 @@ MMAP 与 epool
 
 XLOG
 10 用户唯一标识(######为验证#######)
+
+
+
+块设备的读写限制 (读：就读一块内容，写就写一块block)
+
+man(2) 3
+
+
+设备文件有才有阻塞这么一说
+字符设备 binder  /dev/binder 
+
+为什么会出现小文件合并这样的思想，从硬件上面考虑的
+
+存储设备或者说block设备，以扇区存储单元，一个扇区512b,特性是一个扇区只能存储
+一个文件的内容，所以如果有大量的小文件的10几k的小文件也会暂用一个扇区，
+从存储空间的使用率来看，使用率太低，所以就出现张绍文的小文件合并操作,
+也可以这样，压缩多个文件成一个大文件也是一种思路
+
+文件系统管理的是文件，以文件单位，映射了inode(结构体，包含了很多属性)
+
+原子操作
+
+文件共享，sdcard，两个进程read，write同一个sdcard中的文件, 就可以实现进程间通信
+
+文件锁
+
+
+
+读消息：
+java    ActivityThrad.main()--> Looper.prepared()-->looper()--->MessageQueue.next()-->nativePollOnce()
+
+
+c  MessageQueue.cpp --> nativePollOnce() ---> Looper.cpp  pollOnce() ---> epoll_wait(timeout) 库函数,阻塞当前线程，
+
+// Allocate the new epoll instance and register the wake pipe.
+    mEpollFd = epoll_create(EPOLL_SIZE_HINT);
+
+    int eventCount = epoll_wait(mEpollFd, eventItems, EPOLL_MAX_EVENTS, timeoutMillis);
+直到有, 
+
+发送消息
+java  handler.sendMessage(msg),   -0--> >MessageQueue(单项列表，按照时间排序)  ---> nativeWake() --- 
+
+c   MessageQueue.cpp  -->wake() ---> Looper.wake() --->    
+ssize_t nWrite = TEMP_FAILURE_RETRY(write(mWakeEventFd, &inc, sizeof(uint64_t)));
+
+
+eventfd - create a file descriptor for event notification
+
+create a file descriptor for event notification
+ mWakeEventFd = eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC);
+ int result = epoll_ctl(mEpollFd, EPOLL_CTL_ADD, mWakeEventFd, & eventItem);
+
+
+
+ActivityThread.main(){
+ Looper.prepareMainLooper();
+ xxxxxx
+
+Looper.loop();
+}
+->准备好了一个looper{ MQ   }
+
+sThreadLocal.set(new Looper(quitAllowed));
+Looper 与 threadlocal(Thread.currentThread()获取) 关联
+
+
+(frameworks/base/core/jni/android_os_MessageQueue.cpp)：
+/system/core/libutils/include/utils/Looper.h
+
+
+Object.wai() 实现在哪里nativie
+
+
+IO 多路复用:  多个io stream 对应多个文件, 多个fd
+select(fds ) 监听多个fd(读写，你自己定义)， 阻塞调用，有一路io返回，就返回
+
+poll(fds  )  和select 一样
+
+异步IO监听
+一切皆文件，所以，鼠标与键盘都是文件，具体是字符设备，
+使用signal 监听这个字符设备的io信号
+
+mmap 存储映射IO
+
+ mWakeEventFd = eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC);
+
