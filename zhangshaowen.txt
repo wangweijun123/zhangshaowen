@@ -181,7 +181,34 @@ square okhttp   chrominu cronet   微信 mars
 匿名共享内存(#####未实践#####)
 overDraw  	
 
-       
+
+
+ 高效开发
+ 程序员最痛恨写文档，还有别人不写文档
+ 9 编译: 三方开源的编译工具 facebook的Buck 与 google 的 bazel
+ 
+ install run (增量编译)      
+ 
+ 10  编译插桩(AspectJ, ASM, ReDex)
+ 性能监控，网络监控，耗电监控
+ 
+ 监控三方SDK某个接口的性能(#####未实践#####)
+ 
+ 某个函数的性能有两种实现，一种是在调用端，一种是函数内部，两个问题： 调用点可能是有很多，第二 没有函数源码
+ 
+插桩就是修改代码，例如，奔溃加try catch
+无痕埋点
+
+插桩方法
+
+java 文件 :  android annotation 自动生成java文件
+
+字节码： 修改字节码(代码监控，代码修改，代码分析)  
+
+操作字节码实现编译插桩功能：
+  
+AspectJ: 可以作用在方法被调用的位置，方法体，静态代码快，异常处理前后插入自定义的代码
+   
 
 frameworks/base/services/core/java/com/android/server/am/ActiveServices.java
 
