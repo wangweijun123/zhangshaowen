@@ -202,8 +202,9 @@ overDraw
  某个函数的性能有两种实现，一种是在调用端，一种是函数内部，两个问题： 调用点可能是有很多，第二 没有函数源码
  
 插桩就是修改代码，例如，奔溃加try catch
-无痕埋点
+无痕埋点: pageid, 控件 resource id(不会变有疑问)， 自动画埋点只能有简单数据，还需要自己设计一套DSL语言,能让插装代码通过反射获取到，这周验证（未验证）
 
+DSL语言： test.a 表示实例test, 字段a  test.test()  表示实例test,调用test方法, [] 数组
 插桩方法
 
 java 文件 :  android annotation 自动生成java文件
