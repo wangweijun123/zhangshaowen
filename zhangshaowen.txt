@@ -214,6 +214,9 @@ java 文件 :  android annotation 自动生成java文件
 操作字节码实现编译插桩功能：
   
 AspectJ: 可以作用在方法被调用的位置，方法体，静态代码快，异常处理前后插入自定义的代码
+
+简书大牛
+https://www.jianshu.com/u/35083fcb7747
    
 
 frameworks/base/services/core/java/com/android/server/am/ActiveServices.java
