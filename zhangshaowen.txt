@@ -219,6 +219,16 @@ AspectJ: 可以作用在方法被调用的位置，方法体，静态代码快�
 
 简书大牛
 https://www.jianshu.com/u/35083fcb7747
+
+高可用上报组件：
+
+数据往哪里写:  内存， mmap,  file 这三种方式需要做对比，对比两个维度， 根据数据量大小和写完时间的对比，在I/O优化中有 (未实践)
+
+采样，存储，上报，容灾
+
+代码埋点:xxx
+可视化埋点  Mixpanel
+无痕埋点: GrowingIO
    
 
 frameworks/base/services/core/java/com/android/server/am/ActiveServices.java
