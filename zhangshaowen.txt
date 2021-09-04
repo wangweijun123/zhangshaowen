@@ -230,6 +230,17 @@ https://www.jianshu.com/u/35083fcb7747
 可视化埋点  Mixpanel
 无痕埋点: GrowingIO
    
+鹏飞的学习心得   
+c/c++ 环境编程参考文档   
+https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5
+
+焦虑不是迷茫与恐慌，而是认识到自己的不足，然后加足马力补齐短板
+
+源码实现自己看，除非遇到某一个知识点跳不过去，采取搜答案，然后再验证
+
+三方library，自己模拟实现
+全栈发展：
+
 
 frameworks/base/services/core/java/com/android/server/am/ActiveServices.java
 
