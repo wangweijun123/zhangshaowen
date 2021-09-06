@@ -242,6 +242,12 @@ https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5
 全栈发展：
 
 
+framework 的学习方法
+    
+
+
+
+
 frameworks/base/services/core/java/com/android/server/am/ActiveServices.java
 
 ActivityThread.main(){
@@ -270,9 +276,17 @@ int eventCount = epoll_wait(mEpollFd, eventItems, EPOLL_MAX_EVENTS, timeoutMilli
 
 
 
+ps -A |grep system_server
+
+查看进程中的内存映射
+cat /proc/xxxx/maps |grep services
 
 
 
+android 源码调试: 使用工具Genymotion，启动模拟器，下载需要调试的java文件，建立同样的包名 (未实践)
+
+init ---> zygote   zygote 进程生万物, 通过fork()子进程，内存copy快速集成父进程加载过的的资源，这里指定是 framework.jar, 所以你想替换
+系统的class，没门, 注意support包不在framework.jar中哦，所以是可以替换的
 
 frameworks/base/services/core/java/com/android/server/am/
   - ActivityManagerService.java
