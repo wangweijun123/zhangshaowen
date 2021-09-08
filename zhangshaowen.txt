@@ -244,9 +244,11 @@ https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5
 
 framework 的学习方法
     
+简历
+面试
+算法:
 
-
-
+我们不应该焦虑，也不需要浮躁，没有不过是的技术，不过时的只有只有学习能力与态度
 
 frameworks/base/services/core/java/com/android/server/am/ActiveServices.java
 
