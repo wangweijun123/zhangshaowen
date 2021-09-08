@@ -1,4 +1,8 @@
+// 头文件中防止重复包含
+#pragma once
+#include <iostream>
 #include "Point.h"
+using namespace std;
 
 const double PI = 3.14;
 
@@ -14,6 +18,6 @@ public:
 	void setCenter(Point p);
 	double calculateZC();
 
-	void container(Point outPoint);
+	void container(Point &outPoint);
 
 };

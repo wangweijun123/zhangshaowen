@@ -1,9 +1,12 @@
 #include<iostream>
-#include "Point.h"
-#include "Circle.h"
 using namespace std;
 
+#include "Point.h"
+#include "Circle.h"
+
+
 int main() {
+	// 难道这是
 	Circle c;
 	c.m_r = 1;
 	double re = c.calculateZC();
@@ -16,7 +19,7 @@ int main() {
 
 
 	Point p; 
-	p.setX(2);
+	p.setX(3);
 	p.setY(1);
 
 	c.container(p);

@@ -1,6 +1,4 @@
-#pragma once
 #include "Circle.h"
-#include<iostream>
 
 void Circle::setR(int r) {
 	m_r = r;
@@ -14,17 +12,17 @@ double Circle::calculateZC() {
 	return 2 * PI * m_r;
 }
 
-void  Circle::container(Point outPoint) {
+void  Circle::container(Point &outPoint) {
 	double distance = (center.getX() - outPoint.getX()) * (center.getX() - outPoint.getX()) +
 		(center.getY() - outPoint.getY()) * (center.getY() - outPoint.getY());
 	double m_distance = m_r * m_r;
 	if (distance > m_distance) {
-		//cout << " 圆外 " << endl;
+		cout << " in circle " << endl;
 	}
 	else if (distance < m_distance) {
-		//cout << " 圆内 " << endl;
+		cout << " out circle " << endl;
 	}
 	else {
-		//cout << " 圆上 " << endl;
+		cout << " up circle " << endl;
 	}
 }

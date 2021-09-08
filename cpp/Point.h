@@ -1,3 +1,8 @@
+// 头文件中防止重复包含
+#pragma once
+#include <iostream>
+using namespace std;
+
 class Point
 {
 public:
