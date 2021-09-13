@@ -1,9 +1,9 @@
-一  高质量高发
+一  高质量高发(学完就立马动手)
 
 1 奔溃:  
 java 与 native奔溃的获取
 
-bugly 捕获 java与native （breakpad）奔溃
+bugly 捕获 java与native （breakpad）c/c++奔溃, 已测试ok
 
 bugly 相信你能抓到java nativie的anr的log
 
