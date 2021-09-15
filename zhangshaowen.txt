@@ -31,7 +31,7 @@ bitmapt的 像素数据:  android系统版本像素数据存放的区域不一�
 重复的bitmap 与 不匹配view的图片，超宽率
 内存监控模块: 大对象的分配 (c)
 
-Zygote 进程启动加载framework.jar与主题, 每个进程都是从zygote进程 fork出来的()
+Zygote 进程启动加载framework.jar与主题, 每个进程都是从zygote进程 fork出来的(内存copy)
 
 3  卡顿：
 本地工具: systrace, traceview
