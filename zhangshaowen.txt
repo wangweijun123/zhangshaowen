@@ -1,11 +1,13 @@
-一  高质量高发
+一  高质量高发(学完就立马动手)
 
 1 奔溃:  
 java 与 native奔溃的获取
 
-bugly 捕获 java与native （breakpad）奔溃
+bugly 捕获 java与native （breakpad）c/c++奔溃, 已测试ok
 
 bugly 相信你能抓到java nativie的anr的log
+
+OOM问题怎么搞，uncatchException能catch住吗?就算能catch住，这个时候app还能干其他事情吗?如果做其他事情会不会二次奔溃  (未测试)
 
 ANR异常怎么搞:  
 
@@ -19,11 +21,19 @@ anr 检测开源方案: BlockCanary, ANR-WatchDog, SafeLooper
 
 2 内存
 
+堆内存不足(GC ---> OOM)  物理内存不足(low memory kill(依照进程的优先级)  ---->  重启)   虚拟地址不足 (oom, 内存分配失败, kill )
+
+运行内存与安装包体积优化
+
 内存泄漏与内存抖动
 
-bitmapt的 像素数据
+bitmapt的 像素数据:  android系统版本像素数据存放的区域不一样  version<3.0 像素数据存在native中，充分利用好物理内存，提高内存的使用率，注意什么时候回收，依赖finalize函数调用回收,
+3.0>version<7.0  像素数据在堆上(像素数据随着对象的回收而回收，当然带来的问题是gc)，因为图片的像素占住空间很大，很容易oom，这时候物理内存可能还有很大空间，但是没有用上，系统内存没有完全利用起来， 所以8.0之后又放到了nativie中，为了提升内存的使用率，NativieAllocationRegistry这个class
+
 重复的bitmap 与 不匹配view的图片，超宽率
-内存监控模块: 大对象的分配
+内存监控模块: 大对象的分配 (c)
+
+Zygote 进程启动加载framework.jar与主题, 每个进程都是从zygote进程 fork出来的(内存copy)
 
 3  卡顿：
 本地工具: systrace, traceview
@@ -244,9 +254,11 @@ https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5
 
 framework 的学习方法
     
+简历
+面试
+算法:
 
-
-
+我们不应该焦虑，也不需要浮躁，没有不过是的技术，不过时的只有只有学习能力与态度
 
 frameworks/base/services/core/java/com/android/server/am/ActiveServices.java
 
