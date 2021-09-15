@@ -7,6 +7,8 @@ bugly 捕获 java与native （breakpad）c/c++奔溃, 已测试ok
 
 bugly 相信你能抓到java nativie的anr的log
 
+OOM问题怎么搞，uncatchException能catch住吗?就算能catch住，这个时候app还能干其他事情吗?如果做其他事情会不会二次奔溃  (未测试)
+
 ANR异常怎么搞:  
 
 监听anr文件
