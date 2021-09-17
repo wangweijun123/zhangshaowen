@@ -19,7 +19,10 @@ http://gityuan.com/2015/10/31/binder-prepare/
 
 anr 检测开源方案: BlockCanary, ANR-WatchDog, SafeLooper 
 
-2 内存
+2 内存 （设备分级(设备的内存,cpu核心数，帧率)， Bitmap, 内存泄漏, 安装包大小  ）
+
+matrix 有HPROF文件裁剪与重复图片监控的实现 （未实践）
+
 
 堆内存不足(GC ---> OOM)  物理内存不足(low memory kill(依照进程的优先级)  ---->  重启)   虚拟地址不足 (oom, 内存分配失败, kill )
 
