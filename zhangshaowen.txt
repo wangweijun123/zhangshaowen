@@ -22,6 +22,9 @@ anr 检测开源方案: BlockCanary, ANR-WatchDog, SafeLooper
 
 2 内存 （设备分级(设备的内存,cpu核心数，帧率)， Bitmap, 内存泄漏, 安装包大小  ）
 
+帧率： 如何获取帧率，简单一点，一秒钟有多少帧 （系统接口 Choreographer）
+
+
 matrix 有HPROF文件裁剪与重复图片监控的实现 （未实践）
 
 内存优化的常见思路 (数据结构ArrayMap),体积更加小的序列话方法（protobuf）, view 复用，对象池 (Message)
