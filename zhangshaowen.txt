@@ -23,8 +23,13 @@ anr 检测开源方案: BlockCanary, ANR-WatchDog, SafeLooper
 
 matrix 有HPROF文件裁剪与重复图片监控的实现 （未实践）
 
+内存优化的常见思路 (数据结构ArrayMap),体积更加小的序列话方法（protobuf）, view 复用，对象池 (Message)
 
 堆内存不足(GC ---> OOM)  物理内存不足(low memory kill(依照进程的优先级)  ---->  重启)   虚拟地址不足 (oom, 内存分配失败, kill )
+
+内存监控：
+采集方式: 因为没有回调，那只能轮训，app在前台, 5分之一次,统计内存使用率，pss，java端大小，触顶率
+GC 监控
 
 运行内存与安装包体积优化
 
@@ -115,6 +120,11 @@ facebook 的 profilo 性能统计工具
 
 1 anr 原理，从源码的角度分析，在上面情况下弹出的， (#####未实践##### )
 2 anr 采集，如何分析
+主流方案：
+BlockCanary
+Anr-WatchDog
+SafeLooper:
+
 3 预防
 
 线程被CPU执行
