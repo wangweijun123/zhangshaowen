@@ -12,6 +12,7 @@ OOM问题怎么搞，uncatchException能catch住吗?就算能catch住，这个�
 ANR异常怎么搞:  
 如何获取anr信息: 思路: 参考 trace.txt 系统是如何生存的 (未测试)
 
+
 监听anr文件
 监控消息队列运行时间
 anr原理
@@ -23,9 +24,21 @@ anr 检测开源方案: BlockCanary, ANR-WatchDog, SafeLooper
 2 内存 （设备分级(设备的内存,cpu核心数，帧率)， Bitmap, 内存泄漏, 安装包大小  ）
 
 帧率： 如何获取帧率，简单一点，一秒钟有多少帧 （系统接口 Choreographer.postFrameCallback(long startdTimePerFrame)）返回每一帧绘制的开始时间
+      异常帧率模拟
+
+
 
 
 matrix 有HPROF文件裁剪与重复图片监控的实现 （未实践）
+APK Checker: 针对 APK 安装包的分析检测工具，根据一系列设定好的规则，检测 APK 是否存在特定的问题，并输出较为详细的检测结果报告，用于分析排查问题以及版本追踪
+Resource Canary: 基于 WeakReference 的特性和 Square Haha 库开发的 Activity 泄漏和 Bitmap 重复创建检测工具
+Trace Canary: 监控ANR、界面流畅性、启动耗时、页面切换耗时、慢函数及卡顿等问题
+SQLite Lint: 按官方最佳实践自动化检测 SQLite 语句的使用质量
+IO Canary: 检测文件 IO 问题，包括：文件 IO 监控和 Closeable Leak 监控
+Battery Canary: 监控 App 活跃线程（待机状态 & 前台 Loop 监控）、ASM 调用 (WakeLock/Alarm/Gps/Wifi/Bluetooth 等传感器)、 
+后台流量 (Wifi/移动网络)等 Battery Historian 统计 App 耗电的数据
+
+
 
 内存优化的常见思路 (数据结构ArrayMap),体积更加小的序列话方法（protobuf）, view 复用，对象池 (Message)
 
@@ -125,8 +138,8 @@ facebook 的 profilo 性能统计工具
 1 anr 原理，从源码的角度分析，在上面情况下弹出的， (#####未实践##### )
 2 anr 采集，如何分析
 主流方案：
-BlockCanary
-Anr-WatchDog
+BlockCanary  (#####未实践##### )
+Anr-WatchDog    (#####未实践##### )
 SafeLooper:
 
 3 预防
