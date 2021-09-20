@@ -1,1 +1,9 @@
-1 异常处理
+matrix 
+
+应用启动耗时监控有两种
+
+Application的启动: Application.onCreate()  ---> 配置的第一个activity.onCreate之前
+
+Activity的启动: onCreate --> onFoucsChange()结束
+
+
