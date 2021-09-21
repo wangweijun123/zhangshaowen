@@ -126,12 +126,21 @@ gc 会导致 stop the world，暂停应用所有线程，必须是在某一个�
 
 
 3  卡顿：
-本地工具: systrace, traceview
+本地工具: systrace, traceview，这个只是本地做的
 可以看到所有线程函数调用栈以及各个函数的调用时间，时间占比
 
 facebook 的 profilo 性能统计工具
 
-打点插桩，修改字节码，aspect 性能统计工具，
+打点插桩，修改字节码，aspect 性能统计工具，给自己关心的每个函数编译时插桩,也就是给函数的入口(起始时间)与出口(结束时间)
+关键线程的函数调用
+
+查看进程cpu的使用率
+cat /proc/{pid}/stat
+
+查看系统的cpu使用率
+cat /proc/stat
+
+top 
 
 
 
@@ -141,6 +150,9 @@ facebook 的 profilo 性能统计工具
 BlockCanary  (#####未实践##### )
 Anr-WatchDog    (#####未实践##### )
 SafeLooper:
+
+matrix 必杀技  (#####未实践##### )
+
 
 3 预防
 
@@ -356,11 +368,15 @@ framework 主要内容:
 
 
 语言是(java与c++)
-应用启动，显示，广播消息，按键信息传递，添加服务
+应用(四大组件启动流程)启动  (在没有刷机情况下，debug 没有成功)  
+显示，
+广播消息，
+按键信息传递，
+添加服务
 
 frmawork 在没有整个系统下的源码调试(主要是services.jar 和  framework.jar)
 
-第一，虚拟机与与sdk下的源码一致，当然这不一定，你可以自己按照包名copy
+第一，虚拟机(不要选择google play,不能调试系统进程,选择对应的google api)与与sdk下的源码一致，当然这不一定，你可以自己按照包名copy
 第二，确保代码与要调试的进程是一致的
 验证方法： 以AMS系统服务为例子
 1 查看system_server 的 pid
