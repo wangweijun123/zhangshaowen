@@ -21,6 +21,10 @@ http://gityuan.com/2015/10/31/binder-prepare/
 
 anr 检测开源方案: BlockCanary, ANR-WatchDog, SafeLooper 
 
+
+
+
+
 2 内存 （设备分级(设备的内存,cpu核心数，帧率)， Bitmap, 内存泄漏, 安装包大小  ）
 
 帧率： 如何获取帧率，简单一点，一秒钟有多少帧 （系统接口 Choreographer.postFrameCallback(long startdTimePerFrame)）返回每一帧绘制的开始时间
