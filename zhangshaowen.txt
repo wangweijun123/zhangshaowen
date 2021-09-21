@@ -358,7 +358,7 @@ framework 主要内容:
 语言是(java与c++)
 应用启动，显示，广播消息，按键信息传递，添加服务
 
-frmawork 在没有整个系统下的源码调试
+frmawork 在没有整个系统下的源码调试(主要是services.jar 和  framework.jar)
 
 第一，虚拟机与与sdk下的源码一致，当然这不一定，你可以自己按照包名copy
 第二，确保代码与要调试的进程是一致的
@@ -382,7 +382,7 @@ zygote 进程: 加载了framework.jar
 generic_x86:/ # cat /proc/1428/maps |grep framework.jar
 b6dcb000-b6dcc000 r--s 00000000 fd:00 945        /system/framework/framework.jar
 
-其他进程都是集成他的，所以copy了他加载了的资源
+其他进程都是zygote.fork()他的，所以其父进程加载的资源，都能被子进程找到
 
 
     
