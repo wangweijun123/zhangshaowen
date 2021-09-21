@@ -348,6 +348,43 @@ https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5
 
 
 framework 的学习方法
+framework 主要内容: 
+   代码              源码目录                   编译目录
+系统相关widget       view                       framework.jar
+系统AMS/PMS...       ../base/services           services.jar
+系统内置资源         base/core                   framwork_res.apk
+
+
+语言是(java与c++)
+应用启动，显示，广播消息，按键信息传递，添加服务
+
+frmawork 在没有整个系统下的源码调试
+
+第一，虚拟机与与sdk下的源码一致，当然这不一定，你可以自己按照包名copy
+第二，确保代码与要调试的进程是一致的
+验证方法： 以AMS系统服务为例子
+1 查看system_server 的 pid
+  ps -A |grep system_server
+  ps |grep system_server
+  
+  
+2 通过cat查看此进程的内存映射，是否有services 映射到内存里面
+  cat /proc/{pid}/maps |grep services
+  结果
+  9ea30000-9f5fb000 r--p 00000000 fd:00 977        /system/framework/oat/x86/services.odex
+  
+  查看某个进程下
+ps -T {pid} 
+这里{pid}是使用ps -A |grep SystemServer查出 SystemServer的进程号
+
+zygote 进程: 加载了framework.jar
+
+generic_x86:/ # cat /proc/1428/maps |grep framework.jar
+b6dcb000-b6dcc000 r--s 00000000 fd:00 945        /system/framework/framework.jar
+
+其他进程都是集成他的，所以copy了他加载了的资源
+
+
     
 简历
 面试
