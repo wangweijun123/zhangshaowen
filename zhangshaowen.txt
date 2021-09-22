@@ -459,6 +459,27 @@ android 源码调试: 使用工具Genymotion，启动模拟器，下载需要调
 init ---> zygote   zygote 进程生万物, 通过fork()子进程，内存copy快速集成父进程加载过的的资源，这里指定是 framework.jar, 所以你想替换
 系统的class，没门, 注意support包不在framework.jar中哦，所以是可以替换的
 
+
+thread 线程  (矛盾的两句话)
+1 减少上下文切换的次数 --->  得出尽量少开线程
+2 尽可能的提高CPU的使用率 ---> 
+
+线程池开多少个线程，还有时间
+
+客户端访问网络的任务特征 :
+
+同一时间, 并发没有几个(超过10个网络任务已经算多了， 所以线程数量全开)，任务的执行时间都短，一般1~2秒就回来了
+
+任务执行周期短
+
+张绍文  --> 核心数的 0.7 背  4核 开3个
+IO密集型 ，cpu密集型， 执行
+
+synchronized  与 lock 的区别
+
+
+
+
 frameworks/base/services/core/java/com/android/server/am/
   - ActivityManagerService.java
   - ActiveServices.java
