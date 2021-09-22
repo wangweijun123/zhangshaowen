@@ -477,7 +477,8 @@ IO密集型 ，cpu密集型， 执行
 
 synchronized  与 lock 的区别
 
-
+synchronized 是 虚拟机的实现
+lock 是java的实现
 
 
 frameworks/base/services/core/java/com/android/server/am/
