@@ -375,6 +375,7 @@ framework 主要内容:
 系统AMS/PMS...       ../base/services           services.jar
 系统内置资源         base/core                   framwork_res.apk
 
+framework: 在没有刷机编译源码的情况下，使用android虚拟机与之对应的版本的系统代码调试, 最重要的是系统的class跑在哪个进程
 
 语言是(java与c++)
 应用(四大组件启动流程)启动  (在没有刷机情况下，debug 没有成功)  
