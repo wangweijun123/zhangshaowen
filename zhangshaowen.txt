@@ -16,9 +16,9 @@ c/c++ 异常： 发出异常信号sig, linux 发出异常信号，signal (int ,s
 
 
 ANR异常怎么搞:  
-如何获取anr信息: 思路: 参考 trace.txt 系统是如何生存的, 系统是通过这个类ProcessCpuTracker.java获取，其实就是读取/proc/xxxx 虚拟文件
+如何获取anr信息: 思路: 参考 trace.txt 系统是如何生存的, 系统是通过这个类ProcessCpuTracker.java获取，其实就是读取linux 中 /proc/xxxx 虚拟文件(size=0)
 
-各个组件以及input 输入ANR 逻辑 (未测试)
+各个组件以及input 输入ANR 逻辑 (未debug)
 
 监听anr文件, 再无权限，需要了解得是系统如何生成trace.txt文件
 
