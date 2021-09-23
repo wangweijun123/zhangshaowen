@@ -1,25 +1,34 @@
 一  高质量高发(学完就立马动手)
 
 1 奔溃:  
-java 与 native奔溃的获取
+java 与 native奔溃的获取, 目的是获取堆栈信息
 
 bugly 捕获 java与native （breakpad）c/c++奔溃, 已测试ok
 
 bugly 相信你能抓到java nativie的anr的log
 
-OOM问题怎么搞，uncatchException能catch住吗?就算能catch住，这个时候app还能干其他事情吗?如果做其他事情会不会二次奔溃  (未测试)
+OOM问题怎么搞，uncatchException能catch住吗?Thread.setDefaultExceptionHandler()能catch住，这个时候app还能干其他事情吗?如果做其他事情会不会二次奔溃  
+
+java 异常Thread.setDefaultExceptionHandler(）获取，注意你是覆盖了系统的默认实现，这时候你得注意覆盖是否有问题，是否需要保存系统得默认实现
+
+c/c++ 异常： 发出异常信号sig, linux 发出异常信号，signal (int ,sigAction), 但是同样注意系统得默认实现,但是只是只是获取到了这么一个异常信号，堆栈信息这么来，
+            google breakpad 能获取到地址， 然后ndk底下有一个哦工具 address2Line(),能打印除行号
+
 
 ANR异常怎么搞:  
-如何获取anr信息: 思路: 参考 trace.txt 系统是如何生存的 (未测试)
+如何获取anr信息: 思路: 参考 trace.txt 系统是如何生存的, 系统是通过这个类ProcessCpuTracker.java获取，其实就是读取/proc/xxxx 虚拟文件
 
+各个组件以及input 输入ANR 逻辑 (未测试)
 
-监听anr文件
-监控消息队列运行时间
+监听anr文件, 再无权限，需要了解得是系统如何生成trace.txt文件
+
+监控消息队列运行时间, 
+
 anr原理
-（这里会迁出一个面出来, 组件的回调函数背系统规定了，组件的回调是谁来调用，跨进程，调用进程是谁, 其实也就是activity启动流程）
+（这里会迁出一个面出来, 组件的回调函数被系统规定了，组件的回调是谁来调用，跨进程，调用进程是谁, 其实也就是activity启动流程）
 http://gityuan.com/2015/10/31/binder-prepare/
 
-anr 检测开源方案: BlockCanary, ANR-WatchDog, SafeLooper 
+anr检测开源方案: BlockCanary, ANR-WatchDog, SafeLooper 
 
 
 
