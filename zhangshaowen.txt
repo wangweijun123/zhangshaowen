@@ -500,6 +500,8 @@ synchronized 是 虚拟机的实现 ： monitor-enter p0    monitor-exit p0
 
 lock 是java的实现
 
+如果不突破 C/C++ LINUX，那就永远也不能突破
+
 
 frameworks/base/services/core/java/com/android/server/am/
   - ActivityManagerService.java
