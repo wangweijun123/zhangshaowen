@@ -399,8 +399,11 @@ anr
 service 启动过程， 
 这里涉及到两个进程, 本进程与 system_service, AMS 告诉 service什么时候创建，至于真正创建(反射)在本进程，具体在ActivityThread.java里面
 
+android_util_Binder.cpp  c++调用 ---> java(层的入口) Binder.execTransact(), 实例Binder对象的时候，调用native方法  init(),在c++层
+保存了binder对象
+不管是调用进程还是system_server进程， 在java层都是 Binder.execTransact() 都是这个入口，由c++调用
 
-
+ 
 frmawork 在没有整个系统下的源码调试(主要是services.jar 和  framework.jar)
 
 第一，虚拟机(不要选择google play,不能调试系统进程,选择对应的google api)与与sdk下的源码一致，当然这不一定，你可以自己按照包名copy
