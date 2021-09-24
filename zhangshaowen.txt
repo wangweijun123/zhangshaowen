@@ -397,7 +397,7 @@ framework: 在没有刷机编译源码的情况下，使用android虚拟机与�
 anr 
 
 service 启动过程， 
-这里涉及到两个进程, 本进程与 system_service, AMS 告诉 service什么创建，至于真正创建在本进程，具体在ActivityThread.java里面
+这里涉及到两个进程, 本进程与 system_service, AMS 告诉 service什么时候创建，至于真正创建(反射)在本进程，具体在ActivityThread.java里面
 
 
 
