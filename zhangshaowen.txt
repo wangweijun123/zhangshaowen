@@ -223,6 +223,11 @@ H A D	IoBridge.java
 2 读文件的buffer设置为block的整数倍4k
 3 资源别泄漏(file.close(), cursor.close())，再也回收不了oom的问题
 
+线程thread创建的监听 （这两个c++的实现）
+file 文件io 的监听   (xhook 开源项目)
+
+
+
 6 存储优化
 存储： 分区，存储空间分区域，单独格式化，单独的文件系统
 
