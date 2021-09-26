@@ -233,7 +233,17 @@ nio例子--->  okhttp okio
 
 大量的小文件合并成大文件，访问的时候通过文件的偏移量与大小来访问，开源项目淘宝的TFS(#####未实践##### )
 /libcore/luni/src/main/java/libcore/io/
-H A D	IoBridge.java	
+H A D	InputStream.read --> IoBridge.java 调用流程 以及使用动态代理 hook住io操作(#####未实践##### )
+
+java hook BlockGuardos 相关的io操作, 动态代理，恰好是接口 (#####未实践#####)
+native hook  profile 监控(性能损耗是ok的) io 操作监控(内容有: 线程，buffer，时间，读写次数)(#####未实践#####)
+微信matrix io-canary 继承，也就是微信里面都可以抽出来的 
+不良情况: 主线程io，
+buffer 对io性能很大影响, 注意体现在内存copy与系统调用的次数
+
+java中的  MappedByteBuffer 就是对 mmap的封装 (#####未实践#####)
+
+无锁的线程安全，无锁的并行计算 java 性能优化4.6(#####未实践#####)
 
 1 几百kb的文件不要在主线程做read ----> 低端机很容易anr了
 2 读文件的buffer设置为block的整数倍4k
