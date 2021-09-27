@@ -19,8 +19,11 @@ java 与 c/c++ 通信的文件命名规范，一般都是java的全类名下划�
 
 ANR异常怎么搞:  
 如何获取anr信息: 思路: 参考 trace.txt 系统是如何生存的, 系统是通过这个类ProcessCpuTracker.java获取，其实就是读取linux 中 /proc/xxxx 虚拟文件(size=0)
-
+anr 的框是 
 各个组件以及input 输入ANR 逻辑 (未debug)
+android 里面组件内的函数弹出anr，这是ams弹出的，弹出前会吧anr写入.trace.txt文件
+另外一个是input
+
 
 监听anr文件, 再无权限，需要了解得是系统如何生成trace.txt文件
 
@@ -32,6 +35,12 @@ http://gityuan.com/2015/10/31/binder-prepare/
 
 anr检测开源方案: BlockCanary, ANR-WatchDog, SafeLooper 
 
+本进程
+startActivity()   ----->  BinderProxy.transact(xxxx)  ----> transactNative  java 层到这里打住了
+
+猜想 android.os.Binder   ---> android_os_Binder.cpp 哦，这个不是哦就是Binder.cpp，  在这个目录下 libs/binder/Binder.cpp
+
+Binder.java  内部类  BinderProxy
 
 
 
