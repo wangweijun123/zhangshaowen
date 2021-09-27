@@ -13,6 +13,8 @@ java 异常Thread.setDefaultExceptionHandler(）获取，注意你是覆盖了�
 
 c/c++ 异常： 发出异常信号sig, linux 发出异常信号，signal (int ,sigAction), 但是同样注意系统得默认实现,但是只是只是获取到了这么一个异常信号，堆栈信息这么来，
             google breakpad 能获取到地址， 然后ndk底下有一个哦工具 address2Line(),能打印除行号
+java 与 c/c++ 通信的文件命名规范，一般都是java的全类名下划线，然后.cpp
+比如android.view.DisplayEventReceiver.java  对应着cpp文件   android_view_DisplayEventReceiver.cpp
 
 
 ANR异常怎么搞:  
