@@ -234,6 +234,9 @@ nio例子--->  okhttp okio
 大量的小文件合并成大文件，访问的时候通过文件的偏移量与大小来访问，开源项目淘宝的TFS(#####未实践##### )
 /libcore/luni/src/main/java/libcore/io/
 H A D	InputStream.read --> IoBridge.java 调用流程 以及使用动态代理 hook住io操作(#####未实践##### )
+FileOutputStream()  ---> IoBridge.open(path) --> Libcore.os.open()  --->  BlockGuardOs.open() ---> Posix.open(native函数)
+Libcore 中 os 是静态变量
+
 
 java hook BlockGuardos 相关的io操作, 动态代理，恰好是接口 (#####未实践#####)
 native hook  profile 监控(性能损耗是ok的) io 操作监控(内容有: 线程，buffer，时间，读写次数)(#####未实践#####)
