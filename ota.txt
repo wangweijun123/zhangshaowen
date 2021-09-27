@@ -1,0 +1,146 @@
+获取最新升级版本信息
+
+接口地址 /ota/getLatestVer
+
+请求方式 GET
+
+consumes 
+
+produces ["*/*"]
+
+接口描述 
+
+请求参数
+
+参数名称
+参数说明
+请求类型
+是否必须
+数据类型
+schema
+deviceType
+deviceType
+query
+false
+string
+
+
+响应示例
+
+{
+	"code": "",
+	"data": {
+		"createTime": "",
+		"desc": "",
+		"descEn": "",
+		"deviceType": "",
+		"url": "",
+		"version": ""
+	},
+	"msg": ""
+}
+
+       createTime
+更新时间
+string(date-time)
+       desc
+更新描述
+string
+       descEn
+英文更新描述
+string
+       deviceType
+设备类型
+string
+       url
+文件路径
+string
+       version
+版本号
+string
+
+
+
+
+Android获取 爱联科技的OTA升级包
+
+接口地址 /ota/getPack
+
+请求方式 GET
+
+consumes 
+
+produces ["*/*"]
+
+接口描述 
+
+请求参数
+
+参数名称
+参数说明
+请求类型
+是否必须
+数据类型
+schema
+url
+url
+query
+false
+string
+
+
+
+
+响应参数
+
+{
+	"code": "",
+	"data": {
+		"datas": [],
+		"enable": [],
+		"head": "",
+		"headNext": "",
+		"tail": [],
+		"totalByteLen": 0,
+		"ver": "",
+		"verCode": ""
+	},
+	"msg": ""
+}
+
+
+       datas
+步骤4. bin文件的数据包,发送到UUID2，长度为5个字节是校验帧（发送到UUID1），需要等待7字节应答；其他的数据帧不需要等待应答
+array
+string
+       enable
+步骤1. 使能发送字节,发送到UUID1，需要应答
+array
+string
+       head
+步骤2. bin文件的头包,发送到UUID1，需要应答
+string
+       headNext
+步骤3. 发送到UUID1，需要应答
+string
+       tail
+步骤5. 最后发送字节数组,发送到UUID1，需要应答，最后一个0x04为关闭指令不需要应答
+array
+string
+       totalByteLen
+总长度字节
+integer(int32)
+       ver
+版本
+string
+       verCode
+版本Code
+string
+
+
+
+
+
+
+
+
