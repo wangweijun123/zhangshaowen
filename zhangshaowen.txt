@@ -179,6 +179,10 @@ volatile 修饰的变量，所有线程都是从主内存读写，所以所有�
 
 synized修饰method时，调用线程必须先获取对象的锁，才能执行，否则当前线程进入blocked状态
 
+synchronized (内部锁，虚拟机实现)
+ReetwenLock  重入锁
+ReadWriteLock 读写分离锁，做到了读与读真正并行，当然了，读与写 和 写与写还是窜行的哈，上面两种锁都是一棒子打死了，所以读写锁，在读的场景多，性能会更高 (测试)
+
 
 1 anr 原理，从源码的角度分析，在上面情况下弹出的， (#####未实践##### )
 2 anr 采集，如何分析
@@ -504,7 +508,7 @@ Looper.loop();
 sThreadLocal.set(new Looper(quitAllowed));
 Looper 与 threadlocal(Thread.currentThread()获取) 关联
 
-
+threadlocal 保存的对象都是线程私有，关联了当前thread对象
 
 (frameworks/base/core/jni/android_os_MessageQueue.cpp)：
 /system/core/libutils/include/utils/Looper.h
