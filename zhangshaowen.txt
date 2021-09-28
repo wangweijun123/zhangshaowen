@@ -551,9 +551,22 @@ thread 线程  (矛盾的两句话)
 张绍文  --> 核心数的 0.7 背  4核 开3个
 IO密集型 ，cpu密集型， 执行
 
-synchronized  与 lock 的区别
+并发的几种方法，并发的安全操作
+
+synchronized  与 lock (retweenload, readwritelock)  condition, 信号量的区别
+
+锁分离: LinkedBlockQueue put 与 take 很好的体现，它有两把锁， put与take做到了真正并行，也就是锁分离
+只需要put 与put 和  take与take做好同步就可以， 因为单向列表的实现
+
+synchronized 
+retrantlock
+这两个是独占锁，做不到读与读的并发
+
+readwritelock  读与读的并发
 
 synchronized 是 虚拟机的实现 ： monitor-enter p0    monitor-exit p0
+
+最终到无锁，
 
 lock 是java的实现
 
