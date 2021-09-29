@@ -37,12 +37,19 @@ anr检测开源方案: BlockCanary, ANR-WatchDog, SafeLooper
 
 本进程
 startActivity()   ----->  BinderProxy.transact(xxxx)  ----> transactNative  java 层到这里打住了
+System_server 进程 回调(c++的回调) Binder.java onTranscat ---> AMS复写了这个方法做了处理,非 ui线程，线程号与进程号不一样
+----> AMS.startActivity(), 学会frameWork层代码的调试,
+
 
 猜想 android.os.Binder   ---> android_os_Binder.cpp 哦，这个不是哦就是Binder.cpp，  在这个目录下 libs/binder/Binder.cpp
 
 如何调试使用gdb调试 系统的 c/c++  (未测试)
 
-Binder.java  内部类  BinderProxy
+Binder.java   BinderProxy.java 只是写在了同一个文件,都是实现iBinder接口
+
+这两个类在两个进程都会跑，所以debug调试xxx 与 system_process(System_server)
+发现新大陆，as可以同时调试两个进程，
+
 
 
 
