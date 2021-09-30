@@ -39,7 +39,13 @@ anr检测开源方案: BlockCanary, ANR-WatchDog, SafeLooper
 startActivity()   ----->  BinderProxy.transact(xxxx)  ----> transactNative  java 层到这里打住了
 System_server 进程 回调(c++的回调) Binder.java onTranscat ---> AMS复写了这个方法做了处理,非 ui线程，线程号与进程号不一样
 ----> AMS.startActivity(), 学会frameWork层代码的调试,as 是可以调试多个进程，两个进程是没有问题，三个进程呢，
-bindservice，是不是牵涉到3个进程(未验证)
+bindservice，是不是牵涉到3个进程，可以啊哈
+
+Activity 如何与 Service 通信
+如果都是在本进程， 1种： 不用写aidl， binderService时， 在服务端扩展Binder类，直接返回,  
+                  2 种： 使用EventBus这类的
+
+oneway 异步 回调
 
 
 
