@@ -586,6 +586,16 @@ lock 是java的实现
 
 如果不突破 C/C++ LINUX，那就永远也不能突破
 
+service分为两种:  跨进的服务 与 本地服务
+本地服务 : 就不用写aidl了，service中扩展binder，在客户端强转binder对象，
+
+跨进程服务:  就必须aidl
+绑定服务时，如果服务进程没有，会创建进程启动服务
+
+源码与文档+加上调试技巧，无所不能
+
+binder进程间通信的时候，client与server都会产生binder线程池
+
 
 frameworks/base/services/core/java/com/android/server/am/
   - ActivityManagerService.java
