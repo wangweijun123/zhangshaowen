@@ -47,6 +47,9 @@ Activity 如何与 Service 通信
 
 oneway 异步 回调
 
+aidl 支持的数据类型（参数与返回值）:  基本类型, ArrayList, HashMap具体实现, 泛型必须是 parcel或者aidl接口, 还有import类型(除了基本数据类型外，就算是同一个包底下)
+
+自定义的数据类型必须实现Parceable, 比如 DownloadInfo implement Parceable, 另外定义 DownloadInfo.aidl 声明，像C 语言中的头文件 
 
 
 猜想 android.os.Binder   ---> android_os_Binder.cpp 哦，这个不是哦就是Binder.cpp，  在这个目录下 libs/binder/Binder.cpp
