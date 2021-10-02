@@ -11,8 +11,10 @@ OOM问题怎么搞，uncatchException能catch住吗?Thread.setDefaultExceptionHa
 
 java 异常Thread.setDefaultExceptionHandler(）获取，注意你是覆盖了系统的默认实现，这时候你得注意覆盖是否有问题，是否需要保存系统得默认实现
 
-c/c++ 异常： 发出异常信号sig, linux 发出异常信号，signal (int ,sigAction), 但是同样注意系统得默认实现,但是只是只是获取到了这么一个异常信号，堆栈信息这么来，
+c/c++ 异常： 发出异常signal信号, linux 发出异常信号，signal (int ,sigAction), 但是同样注意系统得默认实现,但是只是只是获取到了这么一个异常信号，堆栈信息这么来，
             google breakpad 能获取到地址， 然后ndk底下有一个哦工具 address2Line(),能打印除行号
+	    unwind 能获取到c/c++调用栈，另外还需要与java堆栈结合起来(未实践)
+	    
 java 与 c/c++ 通信的文件命名规范，一般都是java的全类名下划线，然后.cpp
 比如android.view.DisplayEventReceiver.java  对应着cpp文件   android_view_DisplayEventReceiver.cpp
 
@@ -99,12 +101,12 @@ Battery Canary: 监控 App 活跃线程（待机状态 & 前台 Loop 监控）�
 
 内存优化的常见思路 (数据结构ArrayMap),体积更加小的序列话方法（protobuf）, view 复用，对象池 (Message)
 
-系统占用最大的对象揪出来
+系统占用最大的对象揪出来 (未实践)
 
 堆内存不足(GC ---> OOM)  物理内存不足(low memory kill(依照进程的优先级)  ---->  重启)   虚拟地址不足 (oom, 内存分配失败, kill )
 
 内存监控：
-采集方式: 因为没有回调，那只能轮训，app在前台, 5分之一次,统计内存使用率，pss，java端大小，触顶率
+采集方式: 因为没有回调，那只能轮训，app在前台, 5分之一次,统计内存使用率，pss，java端大小，触顶率  (未测试)
 GC 监控
 
 运行内存与安装包体积优化
