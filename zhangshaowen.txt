@@ -52,6 +52,8 @@ aidl 支持的数据类型（参数与返回值）:  基本类型, ArrayList, Ha
 自定义的数据类型必须实现Parceable, 比如 DownloadInfo implement Parceable, 另外定义 DownloadInfo.aidl 声明，像C 语言中的头文件 
 
 
+
+
 猜想 android.os.Binder   ---> android_os_Binder.cpp 哦，这个不是哦就是Binder.cpp，  在这个目录下 libs/binder/Binder.cpp
 
 如何调试使用gdb调试 系统的 c/c++  (未测试)
