@@ -605,6 +605,8 @@ service分为两种:  跨进的服务 与 本地服务
 
 binder进程间通信的时候，client与server都会产生binder线程池
 
+google sample 地址
+https://developer.android.google.cn/samples?hl=zh_cn
 
 frameworks/base/services/core/java/com/android/server/am/
   - ActivityManagerService.java
