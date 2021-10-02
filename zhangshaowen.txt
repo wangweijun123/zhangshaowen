@@ -44,6 +44,15 @@ bindservice，是不是牵涉到3个进程，可以啊哈
 Activity 如何与 Service 通信
 如果都是在本进程， 1种： 不用写aidl， binderService时， 在服务端扩展Binder类，直接返回,  
                   2 种： 使用EventBus这类的
+		  
+service 生命周期
+
+ startService (service 无限期运行, 除非自己 stopSelf 与调用方 stopService),说的不一定对，如果有其他组件绑定了服务，
+ 其中一个stopservice是不会停止的哈，所以生命周期长，你需要考虑
+ 什么时候stop它，自己可以自杀，如果如果是startservice，service去处理任务的时间是不知道的，所以只有service本身
+ 知道，那只有service自己去控制
+ 
+ bindService （除非所有的bindService 客户端全部解除bind,service 才会死掉)
 
 oneway 异步 回调
 
