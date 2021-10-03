@@ -80,7 +80,7 @@ Binder.java   BinderProxy.java 只是写在了同一个文件,都是实现iBinde
 
 
 
-2 内存 （设备分级(设备的内存,cpu核心数，帧率)， Bitmap, 内存泄漏, 安装包大小  ）
+2 内存 （设备分级(设备的内存(高低设备),cpu核心数，帧率)， Bitmap, 内存泄漏, 安装包大小  ）
 
 帧率： 如何获取帧率，简单一点，一秒钟有多少帧 （系统接口 Choreographer.postFrameCallback(long startdTimePerFrame)）返回每一帧绘制的开始时间
       异常帧率模拟
@@ -111,7 +111,8 @@ GC 监控
 
 运行内存与安装包体积优化
 
-内存泄漏与内存抖动
+内存泄漏(leakcanary 修改成为显示)与内存抖动(获取gc信息)
+触顶的时候大对象(有哪些对象占用大量内存)的获取，一般是bitmap对象，但是在native中了哈，
 
 内存泄漏：永久泄漏还是短时间泄漏（体现在网络访问的时候）
 
