@@ -20,11 +20,16 @@ java 与 c/c++ 通信的文件命名规范，一般都是java的全类名下划�
 
 
 ANR异常怎么搞:  
+
+如何产生：原理:
+如何捕捉: 像系统一样的获取? 获取进程的错误列表，过滤anr 异常,参考源码，里面有堆栈信息
+如何解决: 堆栈信息
+
 如何获取anr信息: 思路: 参考 trace.txt 系统是如何生存的, 系统是通过这个类ProcessCpuTracker.java获取，其实就是读取linux 中 /proc/xxxx 虚拟文件(size=0)
 anr 的框是ams 弹出，
 各个组件以及input 输入ANR 逻辑 (未debug)
 android 里面组件内的函数弹出anr，这是ams弹出的，弹出前会吧anr写入.trace.txt文件
-另外一个是input (未测试)
+另外一个是input anr是在c++弹出(未测试)
 
 
 监听anr文件, 再无权限，需要了解得是系统如何生成trace.txt文件
@@ -85,7 +90,7 @@ Binder.java   BinderProxy.java 只是写在了同一个文件,都是实现iBinde
 帧率： 如何获取帧率，简单一点，一秒钟有多少帧 （系统接口 Choreographer.postFrameCallback(long startdTimePerFrame)）返回每一帧绘制的开始时间
       异常帧率模拟
 
-
+帧率异常表现: 不稳定性与掉帧的百分比
 
 
 matrix 有HPROF文件裁剪与重复图片监控的实现 （未实践）
