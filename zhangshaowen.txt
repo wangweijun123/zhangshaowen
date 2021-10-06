@@ -197,6 +197,9 @@ gc 会导致 stop the world，暂停应用所有线程，必须是在某一个�
 一定形成一个闭环: 1 监听帧率  2 监听uithread现成的调用栈与函数耗时(java调用栈与c的调用栈) 
 3 gc现在的情况抓取，因为gc 会stop the world，暂停应用现成，app进入到了一个冰点，
 
+matrix 的实现原理: ASM插桩 ：统计methodId (long) ---> method_mapping.txt映射
+   函数的耗时，调用深度，methodId（需要根据生成的mapping文件查找）
+
 本地工具: systrace, traceview，这个只是本地做的
 可以看到所有线程函数调用栈以及各个函数的调用时间，时间占比
 
