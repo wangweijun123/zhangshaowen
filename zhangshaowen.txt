@@ -122,12 +122,15 @@ GC 监控
 内存泄漏：永久泄漏还是短时间泄漏（体现在网络访问的时候）
 
 bitmapt的 像素数据:  android系统版本像素数据存放的区域不一样  version<3.0 像素数据存在native中，充分利用好物理内存，提高内存的使用率，注意什么时候回收，依赖finalize函数调用回收,
-3.0>version<7.0  像素数据在堆上(像素数据随着对象的回收而回收，当然带来的问题是gc)，因为图片的像素占住空间很大，很容易oom，这时候物理内存可能还有很大空间，但是没有用上，系统内存没有完全利用起来， 所以8.0之后又放到了nativie中，为了提升内存的使用率，NativieAllocationRegistry这个class
+3.0>version<7.0  像素数据在堆上(像素数据随着对象的回收而回收，当然带来的问题是gc)，因为图片的像素占住空间很大，很容易oom，这时候物理内存可能还有很大空间，但是没有用上，系统内存没有完全利用起来， 所以8.0之后又放到了nativie中，为了提升内存的使用率，NativieAllocationRegistry这个class, 
 
 重复的bitmap 与 不匹配view的图片，超宽率  (未测试)
 内存监控模块: 大对象的分配 (c)
 
 Zygote 进程启动加载framework.jar与主题, 每个进程都是从zygote进程 fork出来的(内存copy)
+
+系统启动 --> init 进程  --读取配置文件启动-> zygote 进程，从main函数开始执行，干了什么事情，加载了很多java class，比如android.view.xxx, android.os.xxxx，他是app 的父进程，查看ppid就知道了，同时继承了zygote进程的资源,对于无界面的
+
 fork进程的含义:
 1 创建了新的子进程，谁创建它的就是父进程(两个都有独立的空间)
 2 复制了父进程的内存空间，在fork这一个时间点，父子进程的内容是一样的
@@ -244,7 +247,7 @@ matrix 必杀技  (#####未实践##### )
 线程被CPU执行
 Thread.sleep() 或者线程正在进行文件io操作读取操作，让出cpu，读取完毕进入调度序列
 
-消息： 依赖c函数： natviePollOnce , nativeWake
+消息： 依赖c函数： natviePollOnce , nativeWake （epoll_wait(readfd, timeout), epoll_wake(readfd)）未测试
 消息
 
 
@@ -264,6 +267,9 @@ liunx 读文件的时候，以block为单位读取，大小为4kb
 
 5, IO 优化
 虚拟文件系统 (接口)--->具体的文件系统（实现）文件原因有哪些 
+虚拟地址内存空间大小(32位的地址线) 也就是2的32次方 === 4 G  1~3g是用户空间，给app用的， 3~4g是内核空间，是内核程序使用的
+
+
 1 为什么磁盘会损坏(可能硬件与软件的问题)
   多线程或者多进程同时写入，测试哈 ----> 多线程写文件不加锁看效果?
   
