@@ -103,6 +103,14 @@ Battery Canary: 监控 App 活跃线程（待机状态 & 前台 Loop 监控）�
 后台流量 (Wifi/移动网络)等 Battery Historian 统计 App 耗电的数据
 
 
+IO 与 NIO
+标准io流 以字节为单位来处理数据
+
+nio (最重要的两个组件，buffer与channel双向通道) 以块为单位处理数据集
+
+buffer (bytebuffer, intbuffer, charbuffer ....里面就是有一个对应的数据类型的数组) 的原理:  position, limit, capcity, mark
+
+
 
 内存优化的常见思路 (数据结构ArrayMap),体积更加小的序列话方法（protobuf）, view 复用，对象池 (Message)
 
