@@ -754,3 +754,8 @@ frameworks/base/core/java/android/app/
   - ActivityThread.java (内含ApplicationThread)
   
   - ContextImpl.java
+  
+  java主要的数据结构: colleciton (list, Set)   Map
+  list: ArrayList,Vector(synchronized)数组实现   LinkedList 循环双向列表实现
+  
+  
