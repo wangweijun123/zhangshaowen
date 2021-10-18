@@ -775,7 +775,9 @@ frameworks/base/core/java/android/app/
   
   ConcurrentLinkedQueue  并发安全，基于 CAS实现，无锁，高性能， 不阻塞
   
-  blockingQueue, 见闻之一: 阻塞
+  blockingQueue, 见闻之一: 阻塞 LinkedBlockingQueue: 两把锁 ReentrantLock（putLock, takeLock ）
+  
+  synchronzied 独占锁  ReentrantLock  读写锁 (获取读锁，写锁，锁住不同的功能)，性能比ReentrantLock高，10倍
   
   
   
