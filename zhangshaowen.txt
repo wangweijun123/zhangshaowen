@@ -719,6 +719,8 @@ readwritelock  读与读的并发
 
 synchronized 是 虚拟机的实现 ： monitor-enter p0    monitor-exit p0
 
+synchronized 性能不如读写锁，但是在客户端随处可以见，因为客户端并发的情况少呀，所以synchronized写起来方便
+
 最终到无锁，
 
 lock 是java的实现
