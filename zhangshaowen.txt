@@ -657,6 +657,12 @@ Looper 与 threadlocal(Thread.currentThread()获取) 关联
 
 threadlocal 保存的对象都是线程私有，关联了当前thread对象
 
+threadlocal比较特殊,并发安全的一个对象，在多线程操作(set(value),get)无需枷锁
+
+threadlocal.getMap(t) ---> threadlocalMap (每个线程都有单独的map对象,value就是存在这里),
+多个线程往这一个threadlocal里面去存变量，然后去取，都只能取到自己存进去的东西
+
+
 (frameworks/base/core/jni/android_os_MessageQueue.cpp)：
 /system/core/libutils/include/utils/Looper.h
 
