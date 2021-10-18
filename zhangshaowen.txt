@@ -764,6 +764,23 @@ frameworks/base/core/java/android/app/
   - ContextImpl.java
   
   java主要的数据结构: colleciton (list, Set)   Map
-  list: ArrayList,Vector(synchronized)数组实现   LinkedList 循环双向列表实现
+  list: ArrayList,Vector(synchronized),CopyOnWriteArrayList(线程安全)数组实现   LinkedList 循环双向列表实现
+  
+  线程安全的数据结构
+  CopyOnWriteArrayList： 写时copy，写完改变指针的引用: 原理，get读是无锁，write 写时枷锁，重新copy 了一个数组，长度加1，然后填充原有数据，把新的数据加到末尾
+  
+  ConcurrentHashMap 比 Collections.map(map) 在高并发环境下快
+  
+  ConcurrentHashMap: get 无锁， put： 有锁，细粒度的锁
+  
+  ConcurrentLinkedQueue  并发安全，基于 CAS实现，无锁，高性能， 不阻塞
+  
+  blockingQueue, 见闻之一: 阻塞
+  
+  
+  
+  
+  
+  
   
   
