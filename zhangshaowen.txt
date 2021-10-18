@@ -779,6 +779,28 @@ frameworks/base/core/java/android/app/
   
   synchronzied 独占锁  ReentrantLock  读写锁 (获取读锁，写锁，锁住不同的功能)，性能比ReentrantLock高，10倍
   
+  ActivityThread.main()  --> threadLocal.set(new Looper()) --> looper.loop() --while-> messageQueue.next()
+  
+  Looper {
+    MessageQueue()
+  }
+  
+ messageQueue.enqueue(msg, when) --> 比较时间，队列已按照时间拍好顺序
+ 创建MessageQueue对象时候，在c++ 也会创建MessageQueue对象，给java返回地址long
+ 
+ java MessageQueue.next()  --->  c++ NativeMessageQueue.pollOnce()  --> Looper.pollonce() -----> epoll_wait(mWakeEventFd)阻塞， 等待nativewake()来唤醒 
+ ---> write(mWakeEventFd)
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
   
   
   
