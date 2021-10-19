@@ -739,6 +739,19 @@ binder进程间通信的时候，client与server都会产生binder线程池
 
 动态加载so，其实很简单，加载so有两个方法,System.load() loadlibrarey()
 
+跨平台(andjroid 和 ios平台 )开发:
+指的是: H5, facebook 的 RN, 阿里的weex， 微信小程序, flutter 
+
+H5:  webview优化: DNS预解析，GZIP压缩(小的数据量)， 
+webview加载页面全部是从网络上加载的，所以想办法减少体积， 离线包方案，提前下发到客户端，webview拦截资源请求
+
+客户端: webview预创建，提前创建，复用一个 
+混合开发: 客户端同学与前端同学
+
+
+
+
+
 android 源码下载
 https://pan.baidu.com/s/1LOeHW-x7I02pdRR7BMbhyw
 o6b3
