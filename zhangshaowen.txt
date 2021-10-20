@@ -9,6 +9,9 @@ bugly 相信你能抓到java nativie的anr的log
 
 OOM问题怎么搞，uncatchException能catch住吗?Thread.setDefaultExceptionHandler()能catch住，这个时候app还能干其他事情吗?如果做其他事情会不会二次奔溃  
 
+OOM终极解决办法: OOM前，可用的内存的80%了，dump 内存，堆转存，查看最大的对象，内存泄漏的问题
+
+
 java 异常Thread.setDefaultExceptionHandler(）获取，注意你是覆盖了系统的默认实现，这时候你得注意覆盖是否有问题，是否需要保存系统得默认实现
 
 c/c++ 异常： 发出异常signal信号, linux 发出异常信号，signal (int ,sigAction), 但是同样注意系统得默认实现,但是只是只是获取到了这么一个异常信号，堆栈信息这么来，
