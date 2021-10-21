@@ -751,7 +751,18 @@ webview加载页面全部是从网络上加载的，所以想办法减少体积�
 客户端: webview预创建，提前创建，复用一个 
 混合开发: 客户端同学与前端同学
 
+class X {
+    int a;
+    byte b;
+    Integer c = new Integer();
+}
 
+X 对象占内存计算: 类定义:8type,  int : 4,  byte : 1, Integer:指针4
+内存地址对其: 最大filed的整数倍:  8 * 3 = 24
+
+Shallow Size 浅 : 计算自己所占内存大小
+
+Retained Size 相关联的对象是否能被回收，如果能回收，需要加上能回收对象的大小
 
 
 
