@@ -1,6 +1,6 @@
 一  高质量高发(学完就立马动手)
 
-1 奔溃:  
+1 奔溃:  .
 java 与 native奔溃的获取, 目的是获取堆栈信息
 
 bugly 捕获 java与native （breakpad）c/c++奔溃, 已测试ok
