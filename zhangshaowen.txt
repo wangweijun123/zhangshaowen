@@ -96,7 +96,15 @@ Binder.java   BinderProxy.java 只是写在了同一个文件,都是实现iBinde
 帧率异常表现: 不稳定性与掉帧的百分比
 
 
-matrix 有HPROF文件裁剪与重复图片监控的实现 （未实践）
+matrix 有HPROF文件裁剪与重复图片监控的实现  
+
+HPROF文件裁剪 : (matrix 源码 在 HprofBufferShrinker.shrink(File hprofIn, File hprofOut) 一个输入file文件，一个裁剪的文件,能裁剪到30%)
+重复图片监控: 1 拿到类实例ClassObj bitmapclassObj = findclass(Bitmap), list<ClassInstance> bitmapInstance = bitmapclassObj.getlist(
+             2 在通过bitmapInstance 获取mBuffer 字节数组, 比对计算hash值
+	     3 源码在这里 DuplicatedBitmapAnalyzer.findDuplicatedBitmap()
+
+应用在前台与后台的判断(registryCallback( onActivityStart() 与 onActivityStop() 计算器来判断)
+
 APK Checker: 针对 APK 安装包的分析检测工具，根据一系列设定好的规则，检测 APK 是否存在特定的问题，并输出较为详细的检测结果报告，用于分析排查问题以及版本追踪
 Resource Canary: 基于 WeakReference 的特性和 Square Haha 库开发的 Activity 泄漏和 Bitmap 重复创建检测工具
 Trace Canary: 监控ANR、界面流畅性、启动耗时、页面切换耗时、慢函数及卡顿等问题
@@ -113,7 +121,20 @@ nio (最重要的两个组件，buffer与channel双向通道) 以块为单位处
 
 buffer (bytebuffer, intbuffer, charbuffer ....里面就是有一个对应的数据类型的数组) 的原理:  position, limit, capcity, mark
 
+内存优化: 从三个方面入手： 设备分级, Bitmap优化, 内存泄漏
 
+ 设备分级: 低端设备(手机的内存，CPU核心数，cpu频率),动画不要了，减少功能，565格式的图片，更小的内存的缓存
+	onTrimMemory 回调, 清除内存的缓存, 尽量别搞多个进程， 轻量版的app
+ Bitmap优化: 565格式也行
+           大图监控，大图指的是图片大小大于view大小或大于屏幕宽高了哈，至于具体大多少，自己定义倍数，如何监控大图(线上上报log，线下弹出提示, 引用链) (未实践)
+	   重复图片监控: 不同bitmap对象有相同的像素数据Bitmap中的mBuffer
+	   图片的总的内存: 在触顶的时候或者奔溃的时候计算
+   内存泄漏： java 内存泄漏: leakcanary 线上线下，线上 如何dump，hprof文件大小裁剪问题，压缩
+             native 内存泄漏： 
+	     
+   内存监控: 采集方式: app在前台每5分钟采集一次， PSS,JAVA堆，图片总的内存, 计算出触顶率
+   GC 监控： 阻塞性的GC的时间，因为这里会引发卡顿，app进入冰点
+      
 
 内存优化的常见思路 (数据结构ArrayMap),体积更加小的序列话方法（protobuf）, view 复用，对象池 (Message)
 
