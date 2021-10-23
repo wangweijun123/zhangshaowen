@@ -280,7 +280,10 @@ matrix 必杀技  (#####未实践##### )
 线程被CPU执行
 Thread.sleep() 或者线程正在进行文件io操作读取操作，让出cpu，读取完毕进入调度序列
 
-消息： 依赖c函数： natviePollOnce , nativeWake （epoll_wait(readfd, timeout), epoll_wake(readfd)）未测试
+消息： 依赖c函数： natviePollOnce , nativeWake 
+  epoll_create 
+  epoll_ctl(mEpollFd  
+  epoll_wait(readfd, timeout) ）未测试
 消息
 
 
