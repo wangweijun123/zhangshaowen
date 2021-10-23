@@ -98,7 +98,7 @@ Binder.java   BinderProxy.java 只是写在了同一个文件,都是实现iBinde
 
 matrix 有HPROF文件裁剪与重复图片监控的实现  
 
-HPROF文件裁剪 : (matrix 源码 在 HprofBufferShrinker.shrink(File hprofIn, File hprofOut) 一个输入file文件，一个裁剪的文件,能裁剪到30%)
+HPROF文件裁剪 : (matrix 源码 在 HprofBufferShrinker.shrink(File hprofIn, File hprofOut) 一个输入file文件，一个裁剪的文件,能裁剪到30%,必须知道hprof文件协议，这里很复杂)
 重复图片监控: 1 拿到类实例ClassObj bitmapclassObj = findclass(Bitmap), list<ClassInstance> bitmapInstance = bitmapclassObj.getlist(
              2 在通过bitmapInstance 获取mBuffer 字节数组, 比对计算hash值
 	     3 源码在这里 DuplicatedBitmapAnalyzer.findDuplicatedBitmap()
