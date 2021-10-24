@@ -235,6 +235,8 @@ gc 会导致 stop the world，暂停应用所有线程，必须是在某一个�
 
 matrix 的实现原理: ASM插桩 ：统计methodId (long) ---> method_mapping.txt映射
    函数的耗时，调用深度，methodId（需要根据生成的mapping文件查找）
+   
+插桩 (Aspecj, asm) aspectj 封装了ASM
 
 本地工具: systrace, traceview，这个只是本地做的
 可以看到所有线程函数调用栈以及各个函数的调用时间，时间占比
