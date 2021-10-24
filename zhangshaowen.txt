@@ -236,7 +236,9 @@ gc 会导致 stop the world，暂停应用所有线程，必须是在某一个�
 matrix 的实现原理: ASM插桩 ：统计methodId (long) ---> method_mapping.txt映射
    函数的耗时，调用深度，methodId（需要根据生成的mapping文件查找）
    
-插桩 (Aspecj, asm) aspectj 封装了ASM
+插桩 (Aspecj, asm) aspectj 封装了ASM， 除了系统的class不能修改字节码之外，其他都能修改字节码, 插进去的字节码如何调试??????能debug?????，行号能堆上？？？？？
+
+张小龙看人:  1 动手能力  2 想象力  3 完全未知领域愿意折腾
 
 本地工具: systrace, traceview，这个只是本地做的
 可以看到所有线程函数调用栈以及各个函数的调用时间，时间占比
@@ -245,6 +247,14 @@ facebook 的 profilo 性能统计工具
 
 打点插桩，修改字节码，aspect 性能统计工具，给自己关心的每个函数编译时插桩,也就是给函数的入口(起始时间)与出口(结束时间)
 关键线程的函数调用
+
+android 单元测试如何搞: 
+
+minSdkVersion：  兼容的最低 SDK 版 --> 本因为你使用某些api，而且这些api只有在哪个版本之后才能使用
+compileSdkVersion： 始终使用最新的
+targetSdkVersion: 是系统为了兼容api的行为:  比如系统在某个版本(api 19)上需要修改某一个方法(行为被改变), 为了让apk再 系统版本 < api19 上与 >19的版本体验一致
+ 系统读取targetSdkVersion 这个值来决定
+
 
 查看进程cpu的使用率
 cat /proc/{pid}/stat
