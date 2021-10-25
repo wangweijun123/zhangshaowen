@@ -31,7 +31,7 @@ ANR异常怎么搞:
 asm: gradle 插件，transform 处理自己写的代码，引用aar，jar，除了系统class，androix也可以认为是第三方jar
 
 如何捕捉: 像系统一样的获取? 获取进程的错误列表，过滤anr 异常,参考源码，里面有堆栈信息
-如何解决: 堆栈信息（咋搞）
+如何解决: 堆栈信息（咋搞）每个函数都生成了一个methodId (int)
 
 如何获取anr信息: 思路: 参考 trace.txt 系统是如何生存的, 系统是通过这个类ProcessCpuTracker.java获取，其实就是读取linux 中 /proc/xxxx 虚拟文件(size=0)
 anr 的框是ams 弹出，
@@ -42,10 +42,10 @@ android 里面组件内的函数弹出anr，这是ams弹出的，弹出前会吧
 
 监听anr文件, 再无权限，需要了解得是系统如何生成trace.txt文件
 
-监控消息队列运行时间, 
+监控消息队列运行时间, 不准
 
 anr原理
-（这里会迁出一个面出来, 组件的回调函数被系统规定了，组件的回调是谁来调用，跨进程，调用进程是谁, 其实也就是activity启动流程）
+（这里会迁出一个面出来, 组件的回调函数被系统规定了，组件的回调是谁来调用，跨进程，调用进程是谁：System_server, 其实也就是activity启动流程）
 http://gityuan.com/2015/10/31/binder-prepare/
 
 anr检测开源方案: BlockCanary, ANR-WatchDog, SafeLooper 
