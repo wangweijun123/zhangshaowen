@@ -9,7 +9,8 @@ bugly 相信你能抓到java nativie的anr的log
 
 OOM问题怎么搞，uncatchException能catch住吗?Thread.setDefaultExceptionHandler()能catch住，这个时候app还能干其他事情吗?如果做其他事情会不会二次奔溃  
 
-OOM终极解决办法: OOM前，可用的内存的80%了，dump 内存，堆转存，查看最大的对象，内存泄漏的问题
+OOM终极解决办法: OOM前，可用的内存的80%了(轮询:前台5分钟一次，在主线程空闲的Idelhandler, 开启线程启动dump，保存到文件后，开启新的进程分析，哈哈库解析成一个快照)
+  dump 内存，堆转存，查看最大的对象，内存泄漏的问题
 
 
 java 异常Thread.setDefaultExceptionHandler(）获取，注意你是覆盖了系统的默认实现，这时候你得注意覆盖是否有问题，是否需要保存系统得默认实现
@@ -17,6 +18,7 @@ java 异常Thread.setDefaultExceptionHandler(）获取，注意你是覆盖了�
 c/c++ 异常： 发出异常signal信号, linux 发出异常信号，signal (int ,sigAction), 但是同样注意系统得默认实现,但是只是只是获取到了这么一个异常信号，堆栈信息这么来，
             google breakpad 能获取到地址， 然后ndk底下有一个哦工具 address2Line(),能打印除行号
 	    unwind 能获取到c/c++调用栈，另外还需要与java堆栈结合起来(未实践)
+	    c++ 有try catch, 通过Jnienv. 把异常跑到java层来
 	    
 java 与 c/c++ 通信的文件命名规范，一般都是java的全类名下划线，然后.cpp
 比如android.view.DisplayEventReceiver.java  对应着cpp文件   android_view_DisplayEventReceiver.cpp
@@ -24,9 +26,12 @@ java 与 c/c++ 通信的文件命名规范，一般都是java的全类名下划�
 
 ANR异常怎么搞:  
 
-如何产生：原理:
+如何产生：原理: anr 是ams进程弹出的框，监控了组件的声明周期函数，调用之前发送 了一个延时消息，执行完成remove掉，所以就是声明周期方法的执行时间，如何监控
+(编译插桩出来了,Aspecj（对asm封装）简单,asm麻烦出来，都是对class字节码的处理)ProcessCpuTracker.java，没有监控声明周期回调函数就不会anr
+asm: gradle 插件，transform 处理自己写的代码，引用aar，jar，除了系统class，androix也可以认为是第三方jar
+
 如何捕捉: 像系统一样的获取? 获取进程的错误列表，过滤anr 异常,参考源码，里面有堆栈信息
-如何解决: 堆栈信息
+如何解决: 堆栈信息（咋搞）
 
 如何获取anr信息: 思路: 参考 trace.txt 系统是如何生存的, 系统是通过这个类ProcessCpuTracker.java获取，其实就是读取linux 中 /proc/xxxx 虚拟文件(size=0)
 anr 的框是ams 弹出，
