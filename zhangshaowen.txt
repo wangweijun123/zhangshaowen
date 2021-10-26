@@ -740,20 +740,24 @@ thread 线程  (矛盾的两句话)
 
 线程池开多少个线程，还有时间
 
-客户端访问网络的任务特征 :
+客户端访问网络的任务特征 : 同一时间并发不多(),网络执行请求时间短(线程上下文切换几率少)，调用频繁，那么多开线程
 
 同一时间, 并发没有几个(超过10个网络任务已经算多了， 所以线程数量全开)，任务的执行时间都短，一般1~2秒就回来了
+
+
+okhttp线程个数:  ThreadPoolExecutor(0, Integer.MAX_VALUE
 
 任务执行周期短
 
 张绍文  --> 核心数的 0.7 背  4核 开3个
-IO密集型 ，cpu密集型， 执行
+IO密集型 ： 任务主要是读写操作呗, cpu碰到io操作,就会上下文切换,如果其他线程有任务，会被切换，没有进入等待,产生了iowait
+cpu密集型， 任务主要是做逻辑预算
 
-并发的几种方法，并发的安全操作
+安全并发的几种方法，并发的安全操作
 
 synchronized  与 lock (retweenload, readwritelock)  condition, 信号量的区别
 
-锁分离: LinkedBlockQueue put 与 take 很好的体现，它有两把锁， put与take做到了真正并行，也就是锁分离
+锁分离: LinkedBlockQueue put 与 take 很好的体现，它有两把锁ReentrantLock加上Condition， put与take做到了真正并行，也就是锁分离
 只需要put 与put 和  take与take做好同步就可以， 因为单向列表的实现
 
 synchronized 
@@ -764,9 +768,9 @@ readwritelock  读与读的并发
 
 synchronized 是 虚拟机的实现 ： monitor-enter p0    monitor-exit p0
 
-synchronized 性能不如读写锁，但是在客户端随处可以见，因为客户端并发的情况少呀，所以synchronized写起来方便
+synchronized 性能不如读写锁，但是在客户端随处可以见synchronized，因为客户端并发的情况少呀，所以synchronized写起来方便
 
-最终到无锁，
+最终到无锁，CAS 
 
 lock 是java的实现
 
@@ -776,7 +780,7 @@ service分为两种:  跨进的服务 与 本地服务
 本地服务 : 就不用写aidl了，service中扩展binder，在客户端强转binder对象，
 
 跨进程服务:  就必须aidl
-绑定服务时，如果服务进程没有，会创建进程启动服务
+绑定服务时，如果服务进程没有启动，会创建进程启动服务
 
 源码与文档+加上调试技巧，无所不能
 
@@ -832,8 +836,14 @@ frameworks/base/core/java/android/app/
   
   - ContextImpl.java
   
-  java主要的数据结构: colleciton (list, Set)   Map
+  java主要的数据结构:所有的数据结构都是基于数组与列表扩展  colleciton (list, Set)   Map
   list: ArrayList,Vector(synchronized),CopyOnWriteArrayList(线程安全)数组实现   LinkedList 循环双向列表实现
+  
+  ArrayList： 数组，加扩容
+  LinkedList： 列表
+  
+  Map： 数组加列表
+  任何东西其他源码加上debug技巧，无锁不能
   
   线程安全的数据结构
   CopyOnWriteArrayList： 写时copy，写完改变指针的引用: 原理，get读是无锁，write 写时枷锁，重新copy 了一个数组，长度加1，然后填充原有数据，把新的数据加到末尾
