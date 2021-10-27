@@ -487,11 +487,22 @@ square okhttp   chrominu cronet   微信 mars
 
 8 UI 优化
 
-适配(dp, 限定符资源)
+适配(dp, 限定符资源) dp 与自适应布局基本可以搞定屏幕碎片问题
+Window 是view的容器，每个窗口关联一个surface
 匿名共享内存(#####未实践#####)
-overDraw  	
+overDraw  	mContext
+Activity 有属性Window(PhoneWindow)  Window里面有DecorView(顶层view， view是一个树),还有Context mContext;
+Activity中创建PhoneWindow对象时候，穿的是this,也就是activity本身
+PhoneWindow 有activity对象，相互持有
+
+SurfaceView 与 TexttureView 是单独的surface
 
 
+
+Activity  -- Window  ---- decorview --- surface
+View 内部有displaylist boolean 是否需要重新绘制， true是的
+
+VSYNC ---> 时钟中断，帧率是设备硬件决定
 
  高效开发
  程序员最痛恨写文档，还有别人不写文档
