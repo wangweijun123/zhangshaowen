@@ -30,6 +30,12 @@ ANR异常怎么搞:
 (编译插桩出来了,Aspecj（对asm封装）简单,asm麻烦出来，都是对class字节码的处理)ProcessCpuTracker.java，没有监控声明周期回调函数就不会anr
 asm: gradle 插件，transform 处理自己写的代码，引用aar，jar，除了系统class，androix也可以认为是第三方jar
 
+断点调试gradle 插件： 
+https://fucknmb.com/2017/07/05/%E5%8F%88%E6%8E%8C%E6%8F%A1%E4%BA%86%E4%B8%80%E9%A1%B9%E6%96%B0%E6%8A%80%E8%83%BD-%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95Gradle%E6%8F%92%E4%BB%B6/
+
+直接用插件项目来测，将其发布到本地maven来进行debug
+
+
 如何捕捉: 像系统一样的获取? 获取进程的错误列表，过滤anr 异常,参考源码，里面有堆栈信息
 如何解决: 堆栈信息（咋搞）每个函数都生成了一个methodId (int)
 
