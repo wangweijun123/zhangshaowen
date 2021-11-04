@@ -941,7 +941,9 @@ frameworks/base/core/java/android/app/
 
 剩下还有算法，项目，简历重新写
  
- 
+文件合并, 1.txt, 2.txt, 3.txt  以1为基准,把2,3 append上去
+
+aroute: map 是什么时候映射的, 
  
  
  
