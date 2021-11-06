@@ -65,6 +65,31 @@ bindservice，是不是牵涉到3个进程，可以啊哈
 Activity 如何与 Service 通信
 如果都是在本进程， 1种： 不用写aidl， binderService时， 在服务端扩展Binder类，直接返回,  
                   2 种： 使用EventBus这类的
+binder驱动: 第一，涉及到三个进程: Client, Service进程 debug 的时候 ServiceManager 进程在虚拟机没有找到
+
+1  Service进程通过binder驱动向ServerManager进程, 注册binder 服务对象 (com.lifeblood.ITestService)名字, binder
+
+2 client 进程bindservice(intent, connect)--> 通过名字(com.lifeblood.ITestService)服务查找 请求binder驱动 ---> ServerManager进程返回
+
+
+Binder.java  BinderProxy.java 同一个文件android6.0
+
+
+BinderProxy {
+  transcate(Parcel p)  ---> nativeTranscate(Parcel p) ---> 通过jni调用android_util_Binder.cpp 开始数据copy,系统调用emcpy( size()). size, 开辟在内核缓冲区
+  比如写两个值 int a=1, String b = "abc",  int 占4个字节, 字符串长度，这里开辟2个字节表示字符串长度，后面就是字符串的数据, 
+  binder驱动通知服务端进程binder线程池的某一个线程，服务器用户空间与内核缓冲区做了映射, 所以它不需要把内核缓冲区数据copy 服务端用户空间 
+}
+
+从代码层面
+Binder {
+  onTranscate(Parcel p),解包 byte[], 前四个字节表示int, 先读取2个字节,字符串长度，然后读取内容，与做蓝牙开源项目给设备发送命令一致，先告诉对方数据有多少，然后
+  在读真正的数据
+}
+
+		  
+		  
+		  
 		  
 service 生命周期
 
