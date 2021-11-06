@@ -50,6 +50,8 @@ android 里面组件内的函数弹出anr，这是ams弹出的，弹出前会吧
 
 监控消息队列运行时间, 不准
 
+消息屏障 MessageQueue. next() (未测试)
+
 anr原理
 （这里会迁出一个面出来, 组件的回调函数被系统规定了，组件的回调是谁来调用，跨进程，调用进程是谁：System_server, 其实也就是activity启动流程）
 http://gityuan.com/2015/10/31/binder-prepare/
