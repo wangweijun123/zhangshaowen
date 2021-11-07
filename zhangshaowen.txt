@@ -990,8 +990,12 @@ aroute:
  
  
  
- 
+ 需要验证的问题
  模拟下载失败, 也就是在本地文件copy
+ 点击事件流程: 触摸事件的流程
+ Handler binder机制
+ 
+ binder机制: 
  
  
   
