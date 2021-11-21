@@ -1049,6 +1049,15 @@ aroute:
 
 nrf connect 蓝牙调试工具
 
+@hide @systemapi 是对三方app隐藏的，你反射也没有用，
+对于这些是无用的
+1.私有应用 - 基本为内置应用，系统应用，settings，systemUI等
+2.模块库 - wifi-service.jar services.jar等
+3.systemserver - 这个没啥可以说的，必须给权限
+
+
+
+
 
 
  
