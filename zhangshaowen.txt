@@ -1061,7 +1061,10 @@ c 静态分配内存： int arr[10]; 这个就是静态分配, 在栈上面，�
   动态分配内存: void* re = malloc(size) ---> free(re)  realloc(re, newSize)
 
 int arr[] = {1,2,3};
-int *p = {}
+int *p = arr;
+
+c/c++ 文档
+https://en.cppreference.com/w/
 
  
  
