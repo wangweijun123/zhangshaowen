@@ -10,9 +10,9 @@ Activity的启动: onCreate --> onFoucsChange()结束
 1 组件化: 为什么要组件化  ViewModel 考虑到数据的生命周期( MVVM )
 2 包体积优化
 3 滑动事件冲突 ViewPager(Recycleview)
-4 HashMap (如何resize, 扩容), ArrayMap, SparseArray, ConcurrentHashMap
+4 HashMap (如何resize, 扩容), ArrayMap, SparseArray, ConcurrentHashMap ok
 5 lifecycleView
-6 Activity: singleTask singleInstance
+6 Activity: singleTask singleInstance  ok
 7 Serializable / Parcelable
 8 java 协程 kotlin  协程
 9 syncronized(this) monitor entry exit
