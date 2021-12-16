@@ -321,6 +321,7 @@ gc 会导致 stop the world，暂停应用所有线程，必须是在某一个�
 3 gc现在的情况抓取，因为gc 会stop the world，暂停应用现成，app进入到了一个冰点，
 
 matrix 的实现原理: ASM插桩 ：统计methodId (long) ---> method_mapping.txt映射
+   编译的时候,onMethodEntry ---> 生产methodId与方法名字对应, 插入一段代码MethodBeat.i(methodId)
    函数的耗时，调用深度，methodId（需要根据生成的mapping文件查找）
    
 插桩 (Aspecj, asm) aspectj 封装了ASM， 除了系统的class不能修改字节码之外，其他都能修改字节码, 插进去的字节码如何调试??????能debug?????，行号能堆上？？？？？
