@@ -317,6 +317,71 @@ gc 会导致 stop the world，暂停应用所有线程，必须是在某一个�
 
 
 3  卡顿：(卡顿过程中函数耗时时间---->插桩 或 profilo 方案)
+卡顿的原因的有千万种,最终都反应在CPU时间上: 咋理解
+CPU时间(用户时间与系统时间)
+
+卡顿分析指标: 两个指标: CPU的使用率与CPU饱和度
+1 CPU的使用率: 
+系统CPU使用情况: /proc/stat
+应用进程CPU使用情况: /proc/pid/stat
+{
+ utime: 反应用户代码执行时间
+ stime: 系统调用(io,锁,系统函数)的时间
+}
+top命令: 查看哪个进程是CPU消耗的大户
+
+CPU饱和度: 反应线程排队等待CPU的情况, 比如说: 4核心的cpu，现在有8个线程, 那每个cpu上跑一个线程，还有一个线程在等待
+         线程优先级:影响android系统CPU调度线程, 需要注意的是是否存在高优先级(UI线程)的线程等待低优先级的线程的锁(后台线程),
+
+
+CPU性能：(主频，核心数(来指定线程的数量 0.7倍)) 计算能力:每秒执行多少条指令
+如何获取: cpu核心数, 频率
+边缘计算(基于CPU->GPU性能提升)
+
+android 卡顿排查工具：TraceView 与 systrace
+
+instrument
+sample
+
+TraceView: 查看整个过程有哪些函数调用, 工具本身来的性能的损耗大, 比如一个函数1秒执行完，开启工具变成了5秒
+
+
+systrace： 跟踪系统的I/O操作,CPU负载, suface渲染, gc等事件    （必须实践systrace 未实践）
+           只能监控系统调用的耗时情况, 但是Trace这个class，预留了Trace.beginSection接口来监听应用程序的耗时情况
+	   也就是插桩版的systrace
+	   
+	   所以,重点来了,通过编译时给每个函数(过滤短函数)插桩,也就是在函数的入口与出口调用Trace.beginSection, Trace.endSection()
+	   这样就能在systrace基础之上能监控应用程序的耗时情况:
+	   好处1： 可以看到整个流程应用与系统的函数调用
+	   好处2: 性能损耗可以接受
+
+android studio profiler CPU跟踪必须干掉  （必须实践profiler 未实践）
+
+如何监控卡顿:
+1 插桩(只能监控应用内的方法耗时,监控不到系统函数耗时): 编译时给每个方法分配一个methodId, 在方法入口与出口调用  2 过滤简短的函数, 过滤一些被调用频繁的函数
+带来的问题: 帧率下降2%， 包体积增大1%~2% ，所以线上如何使用，部分用户开启????
+
+求页面的冻帧率(更加有价值),平均帧率与
+丢帧了, 连续丢帧700ms也就是连续丢帧42帧定义冻帧
+统计冻帧率: 发生冻帧的实际与总的时间的占比 (45 55 12 45),帧率的稳定性
+帧率统计: 只有界面出现绘制才统计 ViewTreeObserver.addDrawListener()
+
+线程监控: 创建线程的数量(native_create)
+
+卡顿现场与卡顿分析
+获取java线程的状态: getState, java 线程与 c++ pthread 映射
+
+卡顿原因: cpu时间上: GC,UI THREAD函数耗时,Thread State
+
+卡顿分析: 监控功能开启的条件: 抽样上报
+
+Flame Chart (火焰图)：能看到函数调用关系以及时间,但是看不到时间占比, 直接使用android profiler查看火烈图, record 记录，在不好使用按钮的时候，请使用api替换 Debug.startMethodTracing
+Wall clock time：该时间信息表示实际经过的时间, 也就是函数执行时间+等待CPU时间
+Thread Time: 函数执行时间
+
+如果需要分析程序启动耗时, 开启启动分析, 自动抓取
+
+透传事件: WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL: 用户触摸对话框之外的事件可以传递到后面那个view
 一定形成一个闭环: 1 监听帧率  2 监听uithread现成的调用栈与函数耗时(java调用栈与c的调用栈) 
 3 gc现在的情况抓取，因为gc 会stop the world，暂停应用现成，app进入到了一个冰点，
 
